@@ -1,0 +1,73 @@
+%DLV con ciudades
+
+city(paris).
+city(rome).
+city(madrid).
+city(berlin).
+
+country(paris,france).
+country(rome, italy).
+country(madrid,spain).
+country(berlin, germany).
+
+start(paris).
+
+%%%%%%%%%%%%%%%%%
+%Disjunctive Rule
+%%%%%%%%%%%%%%%%%
+
+%En una base de datos, para una ciudad dada
+%se va en tren o se va en bus, pero no en ambas.
+
+train(X) v bus(X):-
+  city(X).
+
+%%%%%%%%%%%%%%%%%
+%Constraints
+%%%%%%%%%%%%%%%%%
+
+%No puede haber una base de datos
+%donde haya un tren a italia.
+
+:- train(X),
+  country(X, italy).
+
+%No puede haber una base de datos
+%donde haya un bus a españa.
+
+:- bus(X),
+  country(X, spain).
+
+%Viaje de una ciudad a otra
+%(No de una ciudad a ella misma)
+
+roundWayTrainTicket(X,Y):-
+  train(X),
+  train(Y),
+  X <> Y.
+
+
+roundWayBusTicket(X,Y):-
+  bus(X),
+  bus(Y),
+  X <> Y.
+
+
+convenientTrainTrip(X,STOP,Y):-
+  roundWayTrainTicket(X,STOP),
+  roundWayTrainTicket(STOP,Y),
+  X <> Y.
+
+convenientBusTrip(X,STOP,Y):-
+  roundWayBusTicket(X,STOP),
+  roundWayBusTicket(STOP,Y),
+  X <> Y.
+
+recommendation(byTrain, X,Y,Z):-
+  start(X),
+  convenientTrainTrip(X,Y,Z).
+
+
+recommendation(byBus, X,Y,Z):-
+  start(X),
+  convenientBusTrip(X,Y,Z).

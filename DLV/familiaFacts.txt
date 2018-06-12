@@ -1,0 +1,28 @@
+man(arturo,0).
+man(nelsonE,79).
+man(nelsonR,45).
+man(eddy,42).
+man(alberto,38).
+man(nelsonM,22).
+man(oscar,4).
+
+woman(mercedes,75).
+woman(schantal,19).
+woman(helen,16).
+woman(sugeily,37).
+woman(carmen,0).
+woman(patricia,38).
+
+papa(arturo,nelsonE).
+papa(nelsonE, nelsonR).
+papa(nelsonE, eddy).
+papa(nelsonE, alberto).
+papa(nelsonR, nelsonM).
+papa(eddy, schantal).
+papa(alberto, oscar).
+
+mama(mercedes, nelsonR).
+mama(mercedes, eddy).
+mama(mercedes, alberto).
+mama(patricia, schantal).
+mama(sugeily, helen).

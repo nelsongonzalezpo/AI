@@ -1,0 +1,33 @@
+esAbuelo(X,Z):-
+  papa(X,Y),
+  papa(Y,Z).
+
+esAbuela(X,Z):-
+  mama(X,Y),
+  papa(Y,Z).
+
+sonHermanos(X,Y):-
+  papa(P,X),
+  papa(P,Y),
+  mama(M,X),
+  mama(M,Y),
+  X != Y.
+
+sonPrimos(X,Y):-
+  papa(P,X),
+  papa(L,Y),
+  sonHermanos(P,L).
+
+esBisabuelo(W,Z):-
+  papa(W,X),
+  esAbuelo(X,Z).
+
+esTio(P,Y):-
+  papa(P,X),
+  sonPrimos(Y,X).
+
+
+
+hanFallecido(X,Y):-
+  man(X,0),
+  woman(Y,0).

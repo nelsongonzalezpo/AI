@@ -1,0 +1,56 @@
+%%%%%%%%%%%%%
+%%%%RULES%%%%
+%%%%%%%%%%%%%
+
+haveABreak:-
+  iAmHungry.
+
+
+likedByMaria(X):-
+  likes(maria, X).
+
+
+popular(X):-
+  likes(_, X).
+
+
+dateProposal(X,Y):-
+  man(X),
+  woman(Y),
+  likes(X,Y),
+  likes(Y,X).
+
+blindDateProposal(X,Y):-
+  man(X),
+  woman(Y).
+
+giveAChanceDateProposal(X,Y):-
+  man(X),
+  woman(Y),
+  likes(X,Y),
+  -likes(Y,X).
+
+giveAChanceDateProposal(X,Y):-
+  man(X),
+  woman(Y),
+  -likes(X,Y),
+  likes(Y,X).
+
+
+somebodyLikesHim(Y):-
+  man(Y),
+  woman(X),
+  likes(X,Y).
+
+somebodyLikesHer(Y):-
+  man(X),
+  woman(Y),
+  likes(X,Y).
+
+nobodyLikesHim(X):-
+  man(X),
+  not somebodyLikesHim(X).
+
+nobodyLikesHer(Y):-
+  woman(Y),
+  not somebodyLikesHer(Y).

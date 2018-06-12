@@ -1,0 +1,84 @@
+%RULES%
+
+%Una ciudad es un lugar de origen de un camino
+
+ciudad(ORIGEN) :-
+  camino(ORIGEN,_,_).
+
+%Una ciudad es un lugar de destino de un camino
+
+ciudad(DESTINO) :-
+  camino(_,DESTINO,_).
+
+% Si hay un camino de ida, hay un camino de regreso
+
+camino(ORIGEN, DESTINO, KM):-
+  camino(DESTINO,ORIGEN,KM).
+
+%Reglas disyuntivas
+
+% Puede haber un viaje del origen al destino
+% Si se inicia en el origen
+% y hay un cambio del origen al destino
+% OR
+% Si se inicia en el origen
+% y hay un camino del origen al destino.
+
+viaje(INICIO, DESTINO, KM) v regreso(INICIO, DESTINO, KM) :-
+  iniciaEn(INICIO),
+  camino(INICIO,DESTINO,KM).
+
+% Existe un viaje del origen al destino
+% si hay una ruta para llegar al origen
+% y hay un camino del origen al destino
+% OR
+% Existe un regreso del origen al destino
+% si hay una ruta para llegar al origen
+% y hay un camino del origen al destino.
+
+viaje(X,DESTINO,KM) v regreso(X,DESTINO,KM) :-
+  hayRutaParaLlegarA(X),
+  camino(X,DESTINO,KM).
+
+
+%Hay una ruta para llegar a un DESTINO
+hayRutaParaLlegarA(DESTINO) :-
+  viaje(_,DESTINO,_).
+
+
+%RESTRICCIONES
+
+%No es posible una base de datos en donde
+%existan dos o mas viajes de un origen a
+%destinos distintos
+
+  :- viaje(ORIGEN,DESTINO,_),
+     viaje(ORIGEN,OTRODESTINO,_),
+     DESTINO <> OTRODESTINO.
+
+%No es posible una base de datos en donde
+%existan dos o mas viajes a un destino de
+%origenes distintos
+
+  :- viaje(ORIGEN,DESTINO,_),
+     viaje(OTROORIGEN,DESTINO,_),
+     ORIGEN <> OTROORIGEN.
+
+%No es posible una base de datos
+%en donde no hata un viaje a alguna ciudad
+%no es posible una base de datos donde haya por lo menos
+%una ciudad sin viaje para llegar a ella
+%todas las ciudades son accesibles
+
+
+  :-ciudad(X),
+  not hayRutaParaLlegarA(X).
+
+
+%Optimizacion
+
+%Se generan los answersets dode la suma de los
+%km de los predicados viaje sea menor
+
+  :~ viaje(ORIGEN,DESTINO,KM).
+  [KM:1]

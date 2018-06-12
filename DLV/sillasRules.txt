@@ -1,0 +1,56 @@
+%sillasRules
+
+
+noPuedenSentarseJuntos(X,Y):-
+  noSeLlevan(X,Y).
+
+
+noPuedenSentarseJuntos(X,Y):-
+  noSeLlevan(Y,X).
+
+
+seSientaEn(Persona, Mesa):-
+  seLlevan(Persona, OtraPersona),
+  seSientaEn(OtraPersona, Mesa).
+
+%reglaDis
+%una persona o esta en una mesa o no esta en una mesaDos
+%Cualquier persona se puede sentar en cualquier mesa
+
+seSientaEn(Persona, Mesa) v noSeSientaEn(Persona, Mesa):-
+  persona(Persona),
+  mesa(Mesa).
+
+seSientaEn(Persona, Mesa):-
+  seLlevan(OtraPersona, Persona),
+  seSientaEn(OtraPersona, Mesa).
+
+%RESTRICCIONES
+%No es posible una base de datos donde
+%dos personas que no se lleven y una se encuentre
+%en una mesa y la otra se encuentre en la misma mesa
+%-> evitamos problemas.
+
+:- noPuedenSentarseJuntos(Persona, OtraPersona),
+   seSientaEn(Persona,Mesa),
+   seSientaEn(OtraPersona, Mesa).
+
+
+%no es posible una base de dados
+%donde el numero de mesas donde se encuentra una persona no sea 1
+% una persona solo puede estar en una mesa
+
+
+%Cuenta cuantos valores tiene la variable mesa y si ese valor es 1 es cierto,
+%Sino, no tengo evidencia (No debe ser posible que para una persona, el numero
+%de mesas donde este no sea 1).
+
+:- persona(Persona),
+  not #count{Mesa : seSientaEn(Persona,Mesa)} = 1.
+
+
+%No podemos tener mas personas que sillas en una mesa
+
+:- mesa(Mesa),
+numeroDeSillasEnMesa(Mesa, NumeroDeSillas),
+not #count {Persona: seSientaEn(Persona,Mesa)} <= NumeroDeSillas.

@@ -1,0 +1,36 @@
+%%DOWNLOAD:
+%%http://www.dlvsystem.com/dlv/
+%%Deductive database in DLV
+
+%prediate arity 0
+
+iAmHungry.
+
+%predicate arity 1
+man(john).
+man(george).
+man(paul).
+man(ringo).
+man(alejandro).
+
+woman(shakira).
+woman(maria).
+woman(selena).
+woman("Paquita la del Barrio").
+
+%predicate arity 2
+likes(paul, shakira).
+likes(maria, george).
+likes(george, maria).
+likes(maria, paul).
+likes(alejandro, "Paquita la del Barrio").
+
+%negations
+-likes(paul, maria).
+-likes("Paquita la del Barrio", alejandro).
+
+
+age(shakira, 40).
+age(paul, 75).
+
+payment(shakira, 150000).

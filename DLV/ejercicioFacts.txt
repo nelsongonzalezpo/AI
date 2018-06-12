@@ -1,0 +1,11 @@
+hombre(juan, cholula).
+hombre(paco, puebla).
+hombre(pedro, ny).
+hombre(mario, boston).
+hombre(luis, rd).
+
+mujer(juana, cholula).
+mujer(maria, puebla).
+mujer(mariana, ny).
+mujer(luisa, boston).
+mujer(josefina, rd).

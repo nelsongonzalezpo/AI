@@ -1,0 +1,16 @@
+%ciudad de inicio
+iniciaEn(cholula).
+
+camino(cholula, puebla, 14).
+camino(puebla, df, 160).
+camino(cholula, df, 140).
+camino(atlixco, puebla, 20).
+camino(atlixco, cholula, 30).
+camino(atlixco, df, 190).
+camino(cuernavaca, puebla, 200).
+camino(cuernavaca, df, 90).
+camino(cuernavaca, atlixco, 160).
+camino(cuernavaca, cholula, 240).
+camino(taxco, puebla, 148).
+camino(taxco, df, 113).
+camino(taxco, cuernavaca, 89).

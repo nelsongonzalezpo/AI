@@ -1,0 +1,24 @@
+bebida(cerveza).
+bebida(vino).
+bebida(whisky).
+bebida(ron).
+bebida(cognac).
+
+chelista(X):-
+  consumidor(X,cerveza).
+
+fino(X):-
+  consumidor(X, cognac).
+
+%amigo(X):-
+%  consumidor(X,_).
+
+invitarChelas(X):-
+  chelista(X),
+  amigo(X).
+
+-invitarChelas(X):-
+  -amigo(X).
+
+-invitarChelas(X):-
+  -consumidor(X,cognac).

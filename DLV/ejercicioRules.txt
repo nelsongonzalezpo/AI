@@ -1,0 +1,15 @@
+
+
+vivenJuntos(X,Y,Z):-
+  hombre(X,Z),
+  mujer(Y,Z).
+
+puedenSerNovios(X,Y):-
+  hombre(X,_),
+  mujer(Y,_).
+
+noPuedenSerNovios(X,Y):-
+  vivenJuntos(X,Y,Z).
+
+:- enElFuturo(X,Y)
+  noPuedenSerNovios(_,_).
